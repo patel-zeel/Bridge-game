@@ -2,7 +2,7 @@
 
 main.py has the main class of game.
 
-Basic usage is given the the test.py file as well as below
+Basic usage is given in the ```test.py``` file as well as below,
 
 ```python
 from main import Bridge
