@@ -18,6 +18,8 @@ class Bridge:
         #### Bidding system (Non-gui)
         self.last_bid = None
         self.bidding_array = ["-1_-1","-1_-1","-1_-1"]
+        self.NSTricks = 0
+        self.WETricks = 0
         if self.gui:
             self.reset_bidding_gui()
         
@@ -30,11 +32,11 @@ class Bridge:
         for i in range(4):
             tmp_df = self.card_df.iloc[13*i:13*(i+1)]
             sorted_dfs.append(tmp_df.sort_values('suit'))
-            print("player",i,sorted_dfs[-1].index)
+#             print("player",i,sorted_dfs[-1].index)
         self.card_df = pd.concat(sorted_dfs)
         
         self.card_df['player'] = [self.player[0]]*13 + [self.player[1]]*13 + [self.player[2]]*13 + [self.player[3]]*13
-        print(self.card_df)
+#         print(self.card_df)
         if self.gui:
             self.reset_card_gui()
         
@@ -45,8 +47,6 @@ class Bridge:
         #### Start game play
         if self.gui:
             self.ResultDisplay.config(text='Game\nis\nON')
-        self.NSTricks = 0
-        self.WETricks = 0
         self.start_game_play()
     
     def reset_bidding_gui(self):
@@ -59,6 +59,7 @@ class Bridge:
         
         self.BidDisplay.config(text=f'Bid Won by: \nBid: ')
         self.ResultDisplay.config(text='Complete\nthe bidding')
+        self.TrickDisplay.config(text= f'Tricks:\nNS = {self.NSTricks}\nWE = {self.WETricks}')
         
     def reset_card_gui(self):
         self.clean_middle()
